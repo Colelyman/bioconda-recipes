@@ -1,26 +1,27 @@
 package:
   name: multiqc
-  version: "1.5a"
+  version: "1.6a0"
 
 source:
-  fn: multiqc-ec54507.tar.gz
-  url: https://github.com/ewels/MultiQC/archive/ec54507.tar.gz
-  sha256: a44de98dca99b3ff6f6904f51baa1917a9646e9d3058962bc1afe6e17cf495bb
+  #url: https://github.com/ewels/MultiQC/archive/49aa22a.tar.gz
+  # Use branch with fix for peddy plot issues with unknown sex check
+  url: https://github.com/chapmanb/MultiQC/archive/51cb819.tar.gz
+  sha256: ea4b09d431e541b2b1a68d46cffdee8b5405e9425a5e64b08ff48f3d03bd8b19
 
 build:
-  number: 0
+  number: 1
   preserve_egg_dir: True
 
 requirements:
-  build:
+  host:
     - python
     - setuptools
     - click
     - future >0.14.0
-    - jinja2 >=2.9
     - lzstring
+    - jinja2 >=2.9
+    - matplotlib >=2.1.1
     - markdown
-    - matplotlib
     - numpy
     - pyyaml
     - requests
@@ -33,10 +34,9 @@ requirements:
     - click
     - future >0.14.0
     - jinja2 >=2.9
-    - libgcc  # [linux]
     - lzstring
     - markdown
-    - matplotlib
+    - matplotlib >=2.1.1
     - numpy
     - pyyaml
     - requests
@@ -60,10 +60,12 @@ test:
     - multiqc.modules.bowtie1
     - multiqc.modules.bowtie2
     - multiqc.modules.busco
+    - multiqc.modules.clipandmerge
     - multiqc.modules.clusterflow
     - multiqc.modules.conpair
     - multiqc.modules.custom_content
     - multiqc.modules.cutadapt
+    - multiqc.modules.dedup
     - multiqc.modules.deeptools
     - multiqc.modules.disambiguate
     - multiqc.modules.fastq_screen
@@ -134,3 +136,5 @@ extra:
     extended-base: true  # [py3k]
   skip-lints:
     - uses_setuptools # uses pkg_resources
+  identifiers:
+    - biotools:multiqc
